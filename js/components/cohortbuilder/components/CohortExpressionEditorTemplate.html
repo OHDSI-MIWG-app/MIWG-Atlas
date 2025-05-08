@@ -1,3 +1,4 @@
+<!-- Cohort Entry Events 모달 도움말 -->
 <atlas-modal params="{
 		showModal: helpCohortEventsOpened,
 		title: ko.i18n('components.cohortExpressionEditor.cohortEntryEvents', 'Cohort Entry Events')
@@ -5,6 +6,7 @@
 	<span
 		data-bind="text: ko.i18n('components.cohortExpressionEditor.cohortEntryEventsText_1', 'Events are recorded time-stamped observations for the persons, such as drug exposures, conditions, procedures, measurements and visits. All events have a start date and end date, though some events may have a start date and end date with the same value (such as procedures or measurements).')"></span>
 </atlas-modal>
+<!-- Inclusion Criteria 모달 도움말 -->
 <atlas-modal params="{
 		showModal: helpInclusionCriteriaOpened,
 		title: ko.i18n('components.cohortExpressionEditor.inclusionCriteria', 'Inclusion Criteria')
@@ -13,6 +15,7 @@
 		data-bind="text: ko.i18n('components.cohortExpressionEditor.inclusionCriteriaText', 'The qualifying cohort will be defined as all persons who have an initial event, satisfy the initial event inclusion criteria, and fulfill all additional qualifying inclusion criteria. Each qualifying inclusion criteria will be evaluated to determine the impact of the criteria on the attrition of persons from the initial cohort.')">
 	</div>
 </atlas-modal>
+<!-- Cohort Exit 모달 도움말 -->
 <atlas-modal params="{
 		showModal: helpCohortExitOpened,
 		title: ko.i18n('components.cohortExpressionEditor.cohortExit', 'Cohort Exit'),
@@ -35,18 +38,21 @@
 	</div>
 </atlas-modal>
 
+<!-- Cohort Entry Events 패널 -->
 <div class="panel panel-primary cohort-definition-panel ui-front">
+	<!-- Pannel Header -->
 	<div class="panel-heading">
 		<span
 			data-bind="text: ko.i18n('components.cohortExpressionEditor.cohortEntryEvents', 'Cohort Entry Events')"></span>
 		<i data-bind="click: function () { $component.helpCohortEventsOpened(true) }"
 			class="fa fa-question-circle pull-right"></i>
 	</div>
+	<!-- Pannel Body -->
 	<div class="panel-body">
 		<div class="criteriaGroup">
-
+			<!-- Initial Criteria Editor -->
 			<initial-criteria-editor params="{expression: expression}"></initial-criteria-editor>
-
+			<!-- Observatioin Window -->
 			<div class="observation-window" data-bind="with: $component.expression().PrimaryCriteria().ObservationWindow">
 				<span
 					data-bind="text: ko.i18n('components.cohortExpressionEditor.cohortEntryEventsText_3', 'with continuous observation of at least')"></span>
@@ -59,6 +65,7 @@
 				<span
 					data-bind="text: ko.i18n('components.cohortExpressionEditor.cohortEntryEventsText_5', 'days after event index date')"></span>
 			</div>
+			<!-- Primary Criteria Limit -->
 			<div style="padding-top: 3px" data-bind="with: expression().PrimaryCriteria().PrimaryCriteriaLimit">
 				<span
 					data-bind="text: ko.i18n('components.cohortExpressionEditor.cohortEntryEventsText_6', 'Limit initial events to:')"></span>
@@ -71,7 +78,9 @@
 					data-bind="text: ko.i18n('components.cohortExpressionEditor.cohortEntryEventsText_7', 'per person.')"></span>
 			</div>
 		</div>
+		<!-- Additional Criteria -->
 		<div data-bind="with: expression">
+			<!-- Additional Criteria -->
 			<div data-bind="if: AdditionalCriteria">
 				<div><b
 						data-bind="text: ko.i18n('components.cohortExpressionEditor.restrictInitialEventsTitle', 'Restrict intial events to:')"></b>
@@ -93,6 +102,7 @@
 				<button class="btn btn-sm btn-danger"
 					data-bind="text: ko.i18n('components.cohortExpressionEditor.removeRestriction', 'Remove initial event restriction'), click: function () { $component.removeAdditionalCriteria() }"></button>
 			</div>
+			<!-- Add Additional Criteria -->
 			<div data-bind="ifnot: AdditionalCriteria">
 				<button class="btn btn-sm btn-success"
 					data-bind="text: ko.i18n('components.cohortExpressionEditor.restrictInitialEventsButton', 'Restrict initial events'), click: function () { $component.addAdditionalCriteria() }"></button>
@@ -102,6 +112,7 @@
 </div>
 </div>
 
+<!-- Inclusion Criteria 패널 -->
 <div class="panel panel-primary cohort-definition-panel ui-front">
 	<div class="panel-heading">
 		<span
@@ -168,6 +179,7 @@
 	</div>
 </div>
 
+<!-- Cohort Exit 패널 -->
 <div class="panel panel-primary cohort-definition-panel ui-front">
 	<div class="panel-heading">
 		<span data-bind="text: ko.i18n('components.cohortExpressionEditor.cohortExitTitle', 'Cohort Exit')"></span>
@@ -191,6 +203,7 @@
 	</div>
 </div>
 
+<!-- Cohort Eras 패널 -->
 <div class="panel panel-primary cohort-definition-panel ui-front">
 	<div class="panel-heading">
 		<span data-bind="text: ko.i18n('components.cohortExpressionEditor.cohortErasTitle', 'Cohort Eras')"></span>
