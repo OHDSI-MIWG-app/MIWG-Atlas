@@ -1,0 +1,213 @@
+<!-- ImageOccurrenceTemplate.html -->
+<div class="criteriaSection" data-bind="with: Criteria">
+  <div style="position: relative">
+    <table class="criteriaTable">
+      <colgroup>
+        <col style="width: 100%" />
+        <col />
+      </colgroup>
+      <tr>
+        <td>
+          <span>an image occurrence of</span>
+          <conceptset-selector
+            params="conceptSetId: CodesetId, conceptSets: $component.expression.ConceptSets, defaultName: 'Any Image'"
+          ></conceptset-selector>
+        </td>
+        <td>
+          <div class="btn-group pull-right">
+            <button
+              type="button"
+              class="btn btn-primary btn-sm dropdown-toggle"
+              data-toggle="dropdown"
+            >
+              <i class="fa fa-plus"></i>
+              <span>Add attribute...</span>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" data-bind="foreach:$component.addActions">
+              <li>
+                <a data-bind="click:action" href="#">
+                  <div
+                    class="optionText"
+                    data-bind="text: $data.defaultTitle"
+                  ></div>
+                  <div
+                    class="optionDescription"
+                    data-bind="text: $data.defaultDescription"
+                  ></div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <table class="criteriaTable">
+      <colgroup>
+        <col style="width: 20px" />
+        <col />
+      </colgroup>
+      <tr data-bind="if: DateAdjustment() != null">
+        <td>
+          <i
+            data-bind="click: function() { $component.removeCriterion('DateAdjustment') }"
+            class="fa fa-times"
+          />
+        </td>
+        <td>
+          <span>with date adjustment:</span>
+          <date-adjustment
+            params="DateAdjustment: DateAdjustment"
+          ></date-adjustment>
+        </td>
+      </tr>
+      <tr data-bind="if: FirstDiagnosis() != null">
+        <td>
+          <i
+            data-bind="click: function() { $component.removeCriterion('FirstDiagnosis') }"
+            class="fa fa-times"
+          />
+        </td>
+        <td>
+          <span>for the first time in the person's history</span>
+        </td>
+      </tr>
+      <tr data-bind="if: Age() != null">
+        <td>
+          <i
+            data-bind="click: function() { $component.removeCriterion('Age') }"
+            class="fa fa-times"
+          />
+        </td>
+        <td>
+          <span>Age is:</span>
+          <range params="Range: Age"></range>
+        </td>
+      </tr>
+      <tr data-bind="if: Gender() != null">
+        <td>
+          <i
+            data-bind="click: function() { $component.removeCriterion('Gender') }"
+            class="fa fa-times"
+          />
+        </td>
+        <td>
+          <span>Gender is:</span>
+          <concept-list
+            params="Concepts: Gender, Options: $component.options.gender"
+          />
+        </td>
+      </tr>
+      <tr data-bind="if: GenderCS() != null">
+        <td>
+          <i
+            data-bind="click: function() { $component.removeCriterion('GenderCS') }"
+            class="fa fa-times"
+          />
+        </td>
+        <td>
+          <span>Gender is (from concept set):</span>
+          <conceptset-selector
+            params="conceptSetId: GenderCS().CodesetId, conceptSets: $component.expression.ConceptSets"
+          />
+        </td>
+      </tr>
+      <tr data-bind="if: OccurrenceStartDate() != null">
+        <td>
+          <i
+            data-bind="click: function() { $component.removeCriterion('OccurrenceStartDate') }"
+            class="fa fa-times"
+          />
+        </td>
+        <td>
+          <span>Occurrence start is:</span>
+          <date-range params="Range: OccurrenceStartDate"></date-range>
+        </td>
+      </tr>
+      <tr data-bind="if: Visit() != null">
+        <td>
+          <i
+            data-bind="click: function() { $component.removeCriterion('Visit') }"
+            class="fa fa-times"
+          />
+        </td>
+        <td>
+          <span>Visit is:</span>
+          <concept-list
+            params="Concepts: Visit, Options: $component.options.visit"
+          />
+        </td>
+      </tr>
+      <tr data-bind="if: VisitCS() != null">
+        <td>
+          <i
+            data-bind="click: function() { $component.removeCriterion('VisitCS') }"
+            class="fa fa-times"
+          />
+        </td>
+        <td>
+          <span>Visit is (from concept set):</span>
+          <conceptset-selector
+            params="conceptSetId: VisitCS().CodesetId, conceptSets: $component.expression.ConceptSets"
+          />
+        </td>
+      </tr>
+      <tr data-bind="if: ProcedureOccurrence() != null">
+        <td>
+          <i
+            data-bind="click: function() { $component.removeCriterion('ProcedureOccurrence') }"
+            class="fa fa-times"
+          />
+        </td>
+        <td>
+          <span>Procedure is:</span>
+          <concept-selector
+            params="Concept: ProcedureOccurrence, Options: $component.options.procedure"
+          />
+        </td>
+      </tr>
+      <tr data-bind="if: AnatomicSiteCS() != null">
+        <td>
+          <i
+            data-bind="click: function() { $component.removeCriterion('AnatomicSiteCS') }"
+            class="fa fa-times"
+          />
+        </td>
+        <td>
+          <span>Anatomic site is:</span>
+          <conceptset-selector
+            params="conceptSetId: AnatomicSiteCS().CodesetId, conceptSets: $component.expression.ConceptSets"
+          />
+        </td>
+      </tr>
+      <tr data-bind="if: ModalityCS() != null">
+        <td>
+          <i
+            data-bind="click: function() { $component.removeCriterion('ModalityCS') }"
+            class="fa fa-times"
+          />
+        </td>
+        <td>
+          <span>Modality is:</span>
+          <conceptset-selector
+            params="conceptSetId: ModalityCS().CodesetId, conceptSets: $component.expression.ConceptSets"
+          />
+        </td>
+      </tr>
+      <tr data-bind="if: Nested() != null">
+        <td>
+          <i
+            data-bind="click: function() { $component.removeCriterion('Nested') }"
+            class="fa fa-times"
+          />
+        </td>
+        <td>
+          <criteria-group
+            params="Criteria: Nested, Expression: $component.expression"
+          ></criteria-group>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
