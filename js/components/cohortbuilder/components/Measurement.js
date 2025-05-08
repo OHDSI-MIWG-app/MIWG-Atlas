@@ -1,21 +1,29 @@
 define([
-  "knockout",
-  "../options",
-  "../utils",
-  "../InputTypes/Range",
-  "../InputTypes/DateAdjustment",
-  "../InputTypes/ConceptSetSelection",
-  "../CriteriaGroup",
-  "text!./MeasurementTemplate.html",
-  "../const"
-], function (ko, options, utils, Range, DateAdjustment, ConceptSetSelection, CriteriaGroup, template, constants) {
+  'knockout',
+  '../options',
+  '../utils',
+  '../InputTypes/Range',
+  '../InputTypes/DateAdjustment',
+  '../InputTypes/ConceptSetSelection',
+  '../CriteriaGroup',
+  'text!./MeasurementTemplate.html',
+  '../const',
+], function (
+  ko,
+  options,
+  utils,
+  Range,
+  DateAdjustment,
+  ConceptSetSelection,
+  CriteriaGroup,
+  template,
+  constants
+) {
   function MeasurementViewModel(params) {
     var self = this;
-
     self.expression = ko.utils.unwrapObservable(params.expression);
     self.Criteria = params.criteria.Measurement;
     self.options = options;
-
     self.addActions = [
       {
         ...constants.measurementAttributes.addFirstDiagnosis,
@@ -44,7 +52,9 @@ define([
         selected: false,
         action: function () {
           if (self.Criteria.GenderCS() == null)
-            self.Criteria.GenderCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+            self.Criteria.GenderCS(
+              new ConceptSetSelection({}, self.expression.ConceptSets)
+            );
         },
       },
       {
@@ -54,7 +64,7 @@ define([
           if (self.Criteria.OccurrenceStartDate() == null)
             self.Criteria.OccurrenceStartDate(
               new Range({
-                Op: "lt",
+                Op: 'lt',
               })
             );
         },
@@ -63,7 +73,8 @@ define([
         ...constants.measurementAttributes.addDateAdjustment,
         selected: false,
         action: function () {
-          if (self.Criteria.DateAdjustment() == null) self.Criteria.DateAdjustment(new DateAdjustment());
+          if (self.Criteria.DateAdjustment() == null)
+            self.Criteria.DateAdjustment(new DateAdjustment());
         },
       },
       {
@@ -79,7 +90,9 @@ define([
         selected: false,
         action: function () {
           if (self.Criteria.MeasurementTypeCS() == null)
-            self.Criteria.MeasurementTypeCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+            self.Criteria.MeasurementTypeCS(
+              new ConceptSetSelection({}, self.expression.ConceptSets)
+            );
         },
       },
       {
@@ -95,7 +108,9 @@ define([
         selected: false,
         action: function () {
           if (self.Criteria.VisitTypeCS() == null)
-            self.Criteria.VisitTypeCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+            self.Criteria.VisitTypeCS(
+              new ConceptSetSelection({}, self.expression.ConceptSets)
+            );
         },
       },
       {
@@ -111,7 +126,9 @@ define([
         selected: false,
         action: function () {
           if (self.Criteria.OperatorCS() == null)
-            self.Criteria.OperatorCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+            self.Criteria.OperatorCS(
+              new ConceptSetSelection({}, self.expression.ConceptSets)
+            );
         },
       },
       {
@@ -135,7 +152,9 @@ define([
         selected: false,
         action: function () {
           if (self.Criteria.ValueAsConceptCS() == null)
-            self.Criteria.ValueAsConceptCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+            self.Criteria.ValueAsConceptCS(
+              new ConceptSetSelection({}, self.expression.ConceptSets)
+            );
         },
       },
       {
@@ -151,7 +170,9 @@ define([
         selected: false,
         action: function () {
           if (self.Criteria.UnitCS() == null)
-            self.Criteria.UnitCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+            self.Criteria.UnitCS(
+              new ConceptSetSelection({}, self.expression.ConceptSets)
+            );
         },
       },
       {
@@ -206,7 +227,9 @@ define([
         selected: false,
         action: function () {
           if (self.Criteria.ProviderSpecialtyCS() == null)
-            self.Criteria.ProviderSpecialtyCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+            self.Criteria.ProviderSpecialtyCS(
+              new ConceptSetSelection({}, self.expression.ConceptSets)
+            );
         },
       },
       {
@@ -229,6 +252,8 @@ define([
       },
     ];
 
+    console.log('addActions:', self.addActions); //undefined
+
     self.removeCriterion = function (propertyName) {
       self.Criteria[propertyName](null);
     };
@@ -237,7 +262,7 @@ define([
       var conceptSetName = utils.getConceptSetName(
         self.Criteria.CodesetId,
         self.expression.ConceptSets,
-        ""
+        ''
       );
       return `${conceptSetName}.`;
     });
@@ -246,11 +271,16 @@ define([
       'components.conditionMeasurement.indexDataText',
       'The index date refers to the measurement of <%= conceptSetName %>.',
       {
-        conceptSetName: ko.pureComputed(() => utils.getConceptSetName(
-          self.Criteria.CodesetId,
-          self.expression.ConceptSets,
-          ko.i18n('components.conditionMeasurement.anyMeasurement', 'Any Measurement')
-        ))
+        conceptSetName: ko.pureComputed(() =>
+          utils.getConceptSetName(
+            self.Criteria.CodesetId,
+            self.expression.ConceptSets,
+            ko.i18n(
+              'components.conditionMeasurement.anyMeasurement',
+              'Any Measurement'
+            )
+          )
+        ),
       }
     );
   }
