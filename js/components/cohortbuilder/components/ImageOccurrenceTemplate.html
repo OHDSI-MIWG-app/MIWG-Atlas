@@ -48,7 +48,9 @@
         <col style="width: 20px" />
         <col />
       </colgroup>
-      <tr data-bind="if: DateAdjustment() != null">
+      <!-- <tr
+        data-bind="if: DateAdjustment() != null, visible: DateAdjustment() != null"
+      >
         <td>
           <i
             data-bind="click: function() { $component.removeCriterion('DateAdjustment') }"
@@ -62,7 +64,9 @@
           ></date-adjustment>
         </td>
       </tr>
-      <tr data-bind="if: FirstDiagnosis() != null">
+      <tr
+        data-bind="if: FirstDiagnosis() != null, visible: FirstDiagnosis() != null"
+      >
         <td>
           <i
             data-bind="click: function() { $component.removeCriterion('FirstDiagnosis') }"
@@ -166,8 +170,20 @@
             params="Concept: ProcedureOccurrence, Options: $component.options.procedure"
           />
         </td>
-      </tr>
-      <tr data-bind="if: AnatomicSiteCS() != null">
+      </tr> -->
+      <!-- <tr
+        data-bind="if: ConditionSourceConcept() != null, visible: ConditionSourceConcept() != null"
+      >
+        <td>
+          <i
+            data-bind="click: function() { $component.removeCriterion('ConditionSourceConcept') }, title: ko.i18n('common.remove', 'Remove')"
+            class="fa fa-times"
+          />
+        </td>
+      </tr> -->
+      <tr
+        data-bind="if: AnatomicSiteCS() != null, visible: AnatomicSiteCS() != null"
+      >
         <td>
           <i
             data-bind="click: function() { $component.removeCriterion('AnatomicSiteCS') }"
@@ -175,13 +191,15 @@
           />
         </td>
         <td>
-          <span>Anatomic site is:</span>
-          <conceptset-selector
-            params="conceptSetId: AnatomicSiteCS().CodesetId, conceptSets: $component.expression.ConceptSets"
-          />
+          <div>
+            <span>Anatomic site is:</span>
+            <conceptset-selector
+              params="conceptSetId: AnatomicSiteCS(), conceptSets: $component.expression.ConceptSets, defaultName: 'Any Anatomic Site'"
+            />
+          </div>
         </td>
       </tr>
-      <tr data-bind="if: ModalityCS() != null">
+      <tr data-bind="if: ModalityCS() != null, visible: ModalityCS() != null">
         <td>
           <i
             data-bind="click: function() { $component.removeCriterion('ModalityCS') }"
@@ -191,11 +209,11 @@
         <td>
           <span>Modality is:</span>
           <conceptset-selector
-            params="conceptSetId: ModalityCS().CodesetId, conceptSets: $component.expression.ConceptSets"
+            params="conceptSetId: ModalityCS(), conceptSets: $component.expression.ConceptSets, defaultName: 'Any Modality'"
           />
         </td>
       </tr>
-      <tr data-bind="if: Nested() != null">
+      <!-- <tr data-bind="if: Nested() != null">
         <td>
           <i
             data-bind="click: function() { $component.removeCriterion('Nested') }"
@@ -207,7 +225,7 @@
             params="Criteria: Nested, Expression: $component.expression"
           ></criteria-group>
         </td>
-      </tr>
+      </tr> -->
     </table>
   </div>
 </div>
